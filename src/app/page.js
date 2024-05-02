@@ -8,6 +8,7 @@ import EventListingPage from "@/components/EventListingPage";
 import { TicketProvider } from "../components/TicketContext";
 
 const Home = () => {
+  
   return (
     <TicketProvider>
       <Box className="container">

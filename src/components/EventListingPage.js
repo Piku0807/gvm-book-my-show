@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import BookingDialogbox from "./BookingDialogbox";
 import Link from "next/link";
+import { useTicketContext } from '../components/TicketContext'
 
 const eventsData = [
   {
@@ -67,6 +68,7 @@ const eventsData = [
 const EventListingPage = () => {
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const { availableTickets } = useTicketContext();
 
   const handleClickOpen = (event) => {
     setSelectedEvent(event);
@@ -80,7 +82,6 @@ const EventListingPage = () => {
   return (
     <Grid container spacing={2}>
       {eventsData.map((event, index) => {
-        console.log("data: ", event);
         return (
           <Grid item xs={6} md={3} key={event.id}>
             <Card>
@@ -107,7 +108,7 @@ const EventListingPage = () => {
                     <Typography sx={{ fontWeight: 600 }}>
                       Availability:
                     </Typography>
-                    <Typography>{event.availability} seats</Typography>
+                    <Typography>{availableTickets} seats</Typography>
                   </Box>
 
                   <Box
@@ -131,7 +132,8 @@ const EventListingPage = () => {
                       <BookingDialogbox
                         open={open}
                         handleClose={handleClose}
-                        event={event}
+                        eventId={selectedEvent}
+                        eventData={event}
                       />
                     </Fragment>
                   </Box>
