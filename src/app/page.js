@@ -1,95 +1,132 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import React from "react";
+import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid
+} from "@mui/material";
 
-export default function Home() {
+// ** Global css style
+import "../styles/globals.css";
+
+const eventsData = [
+  {
+    id: 1,
+    eventName: "Stand-up Comedy Night",
+    date: "2024-05-10",
+    time: "20:00",
+    venue: "Laugh Factory",
+    availability: 150,
+    ticketPrice: 20.0,
+  },
+  {
+    id: 2,
+    eventName: "Improv Comedy Show",
+    date: "2024-05-15",
+    time: "19:30",
+    venue: "Funny Bone Theater",
+    availability: 100,
+    ticketPrice: 15.0,
+  },
+  {
+    id: 3,
+    eventName: "Comedy Central Presents",
+    date: "2024-05-20",
+    time: "21:00",
+    venue: "Comedy Club Central",
+    availability: 80,
+    ticketPrice: 25.0,
+  },
+  {
+    id: 4,
+    eventName: "Late Night Laughs",
+    date: "2024-05-25",
+    time: "22:00",
+    venue: "The Chuckle Hut",
+    availability: 120,
+    ticketPrice: 18.0,
+  },
+  {
+    id: 5,
+    eventName: "Comedy Cafe Live",
+    date: "2024-05-30",
+    time: "20:30",
+    venue: "Jokes R Us Cafe",
+    availability: 90,
+    ticketPrice: 12.5,
+  },
+];
+
+const Home = () => {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <Box className="container">
+      <Box>
+        <Typography variant="h3" sx={{ fontWeight: 600 }}>
+          Events
+        </Typography>
+      </Box>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <Box>
+      <Grid container spacing={2}>
+      {eventsData.map((event, index) => {
+        console.log("data: ", event);
+        return (
+          <Grid item xs={6} md={3} key={event.id}>
+            <Card>
+              <CardContent>
+                <Box>
+                  <Box sx={{ mb: "15px" }}>
+                    <Typography sx={{ fontSize: "20px", fontWeight: 700 }}>
+                      {event.eventName}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "row" }}>
+                    <Typography sx={{ fontWeight: 600 }}>Date:</Typography>
+                    <Typography>{event.date}</Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "row" }}>
+                    <Typography sx={{ fontWeight: 600 }}>Time:</Typography>
+                    <Typography>{event.time}</Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "row" }}>
+                    <Typography sx={{ fontWeight: 600 }}>Vanue:</Typography>
+                    <Typography>{event.venue}</Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", flexDirection: "row" }}>
+                    <Typography sx={{ fontWeight: 600 }}>
+                      Availability:
+                    </Typography>
+                    <Typography>{event.availability} seats</Typography>
+                  </Box>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      mt: "15px",
+                    }}
+                  >
+                    <Button
+                      LinkComponent={Link}
+                      variant="contained"
+                      href={`/${event.id}`}
+                    >
+                      View Details
+                    </Button>
+                    <Button variant="contained">Book Ticket</Button>
+                  </Box>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        );
+      })}
+    </Grid>
+      </Box>
+    </Box>
   );
-}
+};
+
+export default Home;
