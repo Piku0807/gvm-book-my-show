@@ -1,0 +1,14 @@
+html,
+body {
+  min-height: 100%;
+}
+
+#__next {
+  height: 100%;
+}
+
+.container{
+  margin: auto;
+  max-width: 1300px;
+  padding: 30px 10px;
+}
